@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #-*- coding: utf-8 -*-
 
 import requests
@@ -34,7 +34,7 @@ def area():
 
     print(data_time[0].text)
     #print('{0:^6}\t确诊:{1:^6}\t疑似:{2:^6}\t治愈:{3:^6}\t死亡:{4:^6}'.format('全国', nation_confirmedCount[0].text, nation_suspectedCount[0].text, nation_curedCount[0].text, nation_deadCount[0].text))
-    ans += '{0:^6}\t确诊:{1:^6}\t疑似:{2:^6}\t治愈:{3:^6}\t死亡:{4:^6}'.format('全国', nation_confirmedCount[0].text, nation_suspectedCount[0].text, nation_curedCount[0].text, nation_deadCount[0].text)
+    ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t死:{4:^6}'.format('全国', nation_confirmedCount[0].text, nation_suspectedCount[0].text, nation_curedCount[0].text, nation_deadCount[0].text) + '\n'
     for i in data:
         provinceShortName = i['provinceShortName']
         confirmedCount = i['confirmedCount']
@@ -42,6 +42,6 @@ def area():
         curedCount = i['curedCount']
         deadCount = i['deadCount']
         #print('省份:{0:^6}\t确诊:{1:^6}\t疑似:{2:^6}\t治愈:{3:^6}\t死亡:{4:^6}'.format(provinceShortName, confirmedCount, suspectedCount, curedCount, deadCount))
-        ans += '省份:{0:^6}\t确诊:{1:^6}\t疑似:{2:^6}\t治愈:{3:^6}\t死亡:{4:^6}'.format(provinceShortName, confirmedCount, suspectedCount, curedCount, deadCount)
+        ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t死:{4:^6}'.format(provinceShortName, confirmedCount, suspectedCount, curedCount, deadCount) + '\n'
 
     return ans
