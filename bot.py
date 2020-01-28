@@ -16,7 +16,7 @@ try:
     def send_area(message):
         string_ans = dxy.area()
         bot.reply_to(message, string_ans)
-    
+
     @bot.message_handler(commands=['graph'])
     def send_graph(message):
         file1, file2 = statistic.graph()

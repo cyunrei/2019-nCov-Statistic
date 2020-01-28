@@ -11,11 +11,11 @@ from data import cured
 from data import confirmed
 
 def graph():
-    plt.rcParams['font.family'] = ['Source Han Sans CN']
+    plt.rcParams['font.family'] = ['WenQuanYi Zen Hei']
     plt.rcParams['savefig.format'] = 'png'
-    plt.rcParams['figure.figsize'] = (16.0, 8.0)
-    plt.rcParams['savefig.dpi'] = 100
-    plt.rcParams['figure.dpi'] = 100
+    plt.rcParams['figure.figsize'] = (12.0, 7.0)
+    plt.rcParams['savefig.dpi'] = 200
+    plt.rcParams['figure.dpi'] = 200
     url = "https://3g.dxy.cn/newh5/view/pneumonia_peopleapp?from=timeline&isappinstalled=0"
     request_headers = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
