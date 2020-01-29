@@ -43,15 +43,17 @@ data_list.append(data_1['confirmedCount'])
 data_list.append(data_1['suspectedCount'])
 data_list.append(data_1['curedCount'])
 data_list.append(data_1['deadCount'])
-label_list = ['确诊（' + str(data_list[0]) + '）', '疑似（' + str(
-    data_list[1]) + '）', '死亡（' + str(data_list[2]) + '）', '治愈（' + str(data_list[3]) + '）']
+'''
+label_list = ['确诊（' + str(data_list[0]) + '）', '疑似（' + str(data_list[1]) + '）', '死亡（' + str(data_list[2]) + '）', '治愈（' + str(data_list[3]) + '）']
 confirmed[time.strftime('%m-%d', time.localtime())] = data_list[0]
 suspected[time.strftime('%m-%d', time.localtime())] = data_list[1]
 dead[time.strftime('%m-%d', time.localtime())] = data_list[2]
 cured[time.strftime('%m-%d', time.localtime())] = data_list[3]
+'''
 f1 = plt.subplot(2, 1, 1)
 f2 = plt.subplot(2, 1, 2)
 plt.sca(f1)
+'''
 color = [confirmed_color, suspected_color, dead_color, cured_color]
 explode = [0, 0, 0, 0.1]
 patches, l_text, p_text = plt.pie(data_list, explode=explode, colors=color, labels=label_list,
@@ -59,20 +61,22 @@ patches, l_text, p_text = plt.pie(data_list, explode=explode, colors=color, labe
 plt.axis("equal")
 plt.title('2019-nCov 统计图 ' + _time)
 plt.legend()
-plt.sca(f2)
+'''
 plt.plot(list(confirmed.keys()), list(confirmed.values()),
          marker='o', label='确诊', color=confirmed_color, linewidth=3)
 plt.plot(list(suspected.keys()), list(suspected.values()),
          marker='v', label='疑似', color=suspected_color, linewidth=3)
+plt.title('2019-nCov 全国疫情新增趋势图 2019-01-11 至 ' + _time)
+plt.legend()
+plt.sca(f2)
 plt.plot(list(cured.keys()), list(cured.values()), marker='s',
          label='治愈', color=cured_color, linewidth=3)
 plt.plot(list(dead.keys()), list(dead.values()), marker='x',
          label='死亡', color=dead_color, linewidth=3)
-plt.title('2019-nCov 统计图 2019-01-11 至 ' + _time)
-title1 = '2019-nCov 统计图 ' + _time
-plt.savefig('./view/{0}.png'.format(title1))
+title1 = '2019-nCov 全国趋势图 ' + _time
+plt.title('2019-nCov 全国疫情死亡/治愈累计趋势图 2019-01-11 至 ' + _time)
 plt.legend()
-
+plt.savefig('./view/{0}.png'.format(title1))
 with open('./data/area_stat (' + _time + ').json', 'w') as f:
     f.write(area_stat[0].text[27:-11])
     f.close()
