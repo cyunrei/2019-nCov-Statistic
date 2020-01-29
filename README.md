@@ -7,7 +7,7 @@ Visual display statistics for 2019-nCov daily and historical data
 
 ## Attention
 
-Data in `data.py should be manually inputed
+Data in `data.py` should be manually inputed
 
 If the fonts don't display on the graphics,plese install `Microsoft YaHei`fonts or others fonts that can display Chinese characters
 ## Program requirement modules
