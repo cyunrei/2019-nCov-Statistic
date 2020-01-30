@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 
 import telebot
-import dxy
-import statistic
+import area
+import graph
 
 bot = telebot.TeleBot('')
 
@@ -14,12 +14,12 @@ try:
 
     @bot.message_handler(commands=['area'])
     def send_area(message):
-        string_ans = dxy.area()
+        string_ans = area.area()
         bot.reply_to(message, string_ans)
 
     @bot.message_handler(commands=['graph'])
     def send_graph(message):
-        file1, file2 = statistic.graph()
+        file1, file2 = graph.graph()
         with open('{0}.png'.format(file1), 'rb') as f:
             graph1 = f.read()
             bot.send_photo(message.chat.id, graph1)
