@@ -27,7 +27,7 @@ def area():
     try:
         data = json.loads(html.text)
 
-        ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format('全国', nation_confirmedCount, nation_suspectedCount, nation_curedCount, nation_deadCount) + '\n'
+        ans += '{0}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format('全国', nation_confirmedCount, nation_suspectedCount, nation_curedCount, nation_deadCount) + '\n'
 
         provinceShortName = []
         confirmedCount = []
@@ -53,7 +53,7 @@ def area():
                     deadCount[i], deadCount[j] = deadCount[j], deadCount[i]
 
         for i in range(0, len(confirmedCount)):
-            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
+            ans += '{0}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
 
         provinceShortName = []
         confirmedCount = []
@@ -81,7 +81,7 @@ def area():
                     deadCount[i], deadCount[j] = deadCount[j], deadCount[i]
 
         for i in range(0, len(confirmedCount)):
-            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
+            ans += '{0}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
 
         return ans
     except:
