@@ -16,7 +16,7 @@ try:
     def send_area(message):
         bot.reply_to(message, 'requesting...')
         string_ans = area.area()
-        bot.reply_to(message, string_ans)
+        bot.reply_to(message, string_ans, parse_mode=Markdown)
 
     @bot.message_handler(commands=['graph'])
     def send_graph(message):
