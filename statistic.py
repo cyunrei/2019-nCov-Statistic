@@ -41,8 +41,7 @@ data_list = []
 with open('./data/statistics (' + _time + ').json', 'w') as f:
     f.write(statistics[0].text[36:-11])
     f.close()
-with open('./data/statistics (' + _time + ').json', 'r') as f:
-    data_1 = json.load(f)
+data_1 = json.loads(statistics[0].text[36:-11])
 data_list.append(data_1['confirmedCount'])
 data_list.append(data_1['suspectedCount'])
 data_list.append(data_1['curedCount'])
@@ -72,8 +71,7 @@ plt.savefig('./view/{0}.png'.format(title1))
 with open('./data/area_stat (' + _time + ').json', 'w') as f:
     f.write(area_stat[0].text[27:-11])
     f.close()
-with open('./data/area_stat (' + _time + ').json', 'r') as f:
-    data_2 = json.load(f)
+data_2 = json.loads(area_stat[0].text[27:-11])
 
 # Draw graph
 provinceShortName = []
