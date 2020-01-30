@@ -10,11 +10,14 @@ from data import cured
 from data import confirmed
 
 def graph():
+
     # Define color
-confirmed_color = '#F74C31'
-suspected_color = '#F78207'
-dead_color = '#5D7092'
-cured_color = '#28B7A3'
+    confirmed_color = '#F74C31'
+    suspected_color = '#F78207'
+    dead_color = '#5D7092'
+    cured_color = '#28B7A3'
+
+    # Setup parameters
     plt.rcParams['font.family'] = ['WenQuanYi Zen Hei']
     plt.rcParams['savefig.format'] = 'png'
     plt.rcParams['figure.figsize'] = (12.0, 7.0)
