@@ -14,11 +14,13 @@ try:
 
     @bot.message_handler(commands=['area'])
     def send_area(message):
+        bot.reply_to(message, 'requesting...')
         string_ans = area.area()
         bot.reply_to(message, string_ans)
 
     @bot.message_handler(commands=['graph'])
     def send_graph(message):
+        bot.reply_to(message, 'requesting...')
         file1, file2 = graph.graph()
         with open('./view/{0}.png'.format(file1), 'rb') as f:
             graph1 = f.read()

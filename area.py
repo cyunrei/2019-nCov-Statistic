@@ -82,4 +82,5 @@ def area():
     for i in range(0, len(confirmedCount)):
         ans += '{0:^6}\t确诊:{1:^6}\t疑似:{2:^6}\t治愈:{3:^6}\t死亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i])
 
+    print(ans)
     return ans
