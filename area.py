@@ -24,11 +24,10 @@ def area():
     area_url = "https://lab.isaaclin.cn/nCoV/api/area"
     html = requests.get(area_url)
     html.encoding = 'utf-8'
-    print(html.text)
     try:
         data = json.loads(html.text)
 
-        ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format('全国', nation_confirmedCount, nation_suspectedCount, nation_curedCount, nation_deadCount)
+        ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format('全国', nation_confirmedCount, nation_suspectedCount, nation_curedCount, nation_deadCount) + '\n'
 
         provinceShortName = []
         confirmedCount = []
@@ -54,7 +53,7 @@ def area():
                     deadCount[i], deadCount[j] = deadCount[j], deadCount[i]
 
         for i in range(0, len(confirmedCount)):
-            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i])
+            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
 
         provinceShortName = []
         confirmedCount = []
@@ -62,7 +61,7 @@ def area():
         curedCount = []
         deadCount = []
 
-        ans += ('===全球===')
+        ans += ('===全球===') + '\n'
 
         for i in data['results']:
             if i['country'] != '中国':
@@ -82,9 +81,8 @@ def area():
                     deadCount[i], deadCount[j] = deadCount[j], deadCount[i]
 
         for i in range(0, len(confirmedCount)):
-            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i])
+            ans += '{0:^6}\t确:{1:^6}\t疑:{2:^6}\t愈:{3:^6}\t亡:{4:^6}'.format(provinceShortName[i], confirmedCount[i], suspectedCount[i], curedCount[i], deadCount[i]) + '\n'
 
-        print(ans)
         return ans
     except:
         ans = 'error'
