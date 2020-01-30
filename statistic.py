@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import requests
 import json
 import time
-import sys
 import pandas as pd
 from lxml import etree
 from data import dead
