@@ -9,11 +9,13 @@ from data import suspected
 from data import cured
 from data import confirmed
 
+# Define color
 confirmed_color = '#F74C31'
 suspected_color = '#F78207'
 dead_color = '#5D7092'
 cured_color = '#28B7A3'
 
+# Setup parameters
 plt.rcParams['font.family'] = ['Microsoft YaHei']
 plt.rcParams['savefig.format'] = 'png'
 plt.rcParams['figure.figsize'] = (16.0, 8.0)
@@ -23,45 +25,32 @@ url = "https://3g.dxy.cn/newh5/view/pneumonia_peopleapp?from=timeline&isappinsta
 request_headers = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) '
                   'Chrome/79.0.3945.130 Safari/537.36'}
+
+# Send request
 response = requests.get(url, headers=request_headers)
 response.encoding = 'utf-8'
 html = etree.HTML(response.text)
 
+# Pick data
 area_stat = html.xpath('//*[@id="getAreaStat"]')
 statistics = html.xpath('//*[@id="getStatisticsService"]')
-#_time = html.xpath('//*[@id="root"]/div/div[4]/div[1]/div/div/span/text()')
-# _time = str(_time)
-# _time = _time[5:-9]
 _time = time.strftime('20%y-%m-%d', time.localtime())
+
+# Save data into files
 data_list = []
 with open('./data/statistics (' + _time + ').json', 'w') as f:
     f.write(statistics[0].text[36:-11])
     f.close()
-with open('./data/statistics (' + _time + ').json', 'r') as f:
-    data_1 = json.load(f)
+data_1 = json.loads(statistics[0].text[36:-11])
 data_list.append(data_1['confirmedCount'])
 data_list.append(data_1['suspectedCount'])
 data_list.append(data_1['curedCount'])
 data_list.append(data_1['deadCount'])
-'''
-label_list = ['确诊（' + str(data_list[0]) + '）', '疑似（' + str(data_list[1]) + '）', '死亡（' + str(data_list[2]) + '）', '治愈（' + str(data_list[3]) + '）']
-confirmed[time.strftime('%m-%d', time.localtime())] = data_list[0]
-suspected[time.strftime('%m-%d', time.localtime())] = data_list[1]
-dead[time.strftime('%m-%d', time.localtime())] = data_list[2]
-cured[time.strftime('%m-%d', time.localtime())] = data_list[3]
-'''
+
+# Draw graph
 f1 = plt.subplot(2, 1, 1)
 f2 = plt.subplot(2, 1, 2)
 plt.sca(f1)
-'''
-color = [confirmed_color, suspected_color, dead_color, cured_color]
-explode = [0, 0, 0, 0.1]
-patches, l_text, p_text = plt.pie(data_list, explode=explode, colors=color, labels=label_list,
-                                  labeldistance=1.1, autopct='%1.1f%%', shadow=True, startangle=90, pctdistance=0.6)
-plt.axis("equal")
-plt.title('2019-nCov 统计图 ' + _time)
-plt.legend()
-'''
 plt.plot(list(confirmed.keys()), list(confirmed.values()),
          marker='o', label='确诊', color=confirmed_color, linewidth=3)
 plt.plot(list(suspected.keys()), list(suspected.values()),
@@ -77,11 +66,14 @@ title1 = '2019-nCov 全国趋势图 ' + _time
 plt.title('2019-nCov 全国疫情死亡/治愈累计趋势图 2019-01-11 至 ' + _time)
 plt.legend()
 plt.savefig('./view/{0}.png'.format(title1))
+
+# Save data into files
 with open('./data/area_stat (' + _time + ').json', 'w') as f:
     f.write(area_stat[0].text[27:-11])
     f.close()
-with open('./data/area_stat (' + _time + ').json', 'r') as f:
-    data_2 = json.load(f)
+data_2 = json.loads(area_stat[0].text[27:-11])
+
+# Draw graph
 provinceShortName = []
 confirmedCount = []
 curedCount = []
