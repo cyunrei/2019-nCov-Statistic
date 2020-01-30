@@ -20,11 +20,11 @@ try:
     @bot.message_handler(commands=['graph'])
     def send_graph(message):
         file1, file2 = graph.graph()
-        with open('{0}.png'.format(file1), 'rb') as f:
+        with open('./view/{0}.png'.format(file1), 'rb') as f:
             graph1 = f.read()
             bot.send_photo(message.chat.id, graph1)
             f.close()
-        with open('{0}.png'.format(file2), 'rb') as f:
+        with open('./view/{0}.png'.format(file2), 'rb') as f:
             graph2 = f.read()
             bot.send_photo(message.chat.id, graph2)
             f.close()
