@@ -13,7 +13,6 @@ confirmed_color = '#F74C31'
 suspected_color = '#F78207'
 dead_color = '#5D7092'
 cured_color = '#28B7A3'
-
 plt.rcParams['font.family'] = ['Microsoft YaHei']
 plt.rcParams['savefig.format'] = 'png'
 plt.rcParams['figure.figsize'] = (16.0, 8.0)
@@ -26,42 +25,21 @@ request_headers = {
 response = requests.get(url, headers=request_headers)
 response.encoding = 'utf-8'
 html = etree.HTML(response.text)
-
 area_stat = html.xpath('//*[@id="getAreaStat"]')
 statistics = html.xpath('//*[@id="getStatisticsService"]')
-#_time = html.xpath('//*[@id="root"]/div/div[4]/div[1]/div/div/span/text()')
-# _time = str(_time)
-# _time = _time[5:-9]
 _time = time.strftime('20%y-%m-%d', time.localtime())
-data_list = []
 with open('./data/statistics (' + _time + ').json', 'w') as f:
     f.write(statistics[0].text[36:-11])
     f.close()
 with open('./data/statistics (' + _time + ').json', 'r') as f:
     data_1 = json.load(f)
-data_list.append(data_1['confirmedCount'])
-data_list.append(data_1['suspectedCount'])
-data_list.append(data_1['curedCount'])
-data_list.append(data_1['deadCount'])
-'''
-label_list = ['确诊（' + str(data_list[0]) + '）', '疑似（' + str(data_list[1]) + '）', '死亡（' + str(data_list[2]) + '）', '治愈（' + str(data_list[3]) + '）']
-confirmed[time.strftime('%m-%d', time.localtime())] = data_list[0]
-suspected[time.strftime('%m-%d', time.localtime())] = data_list[1]
-dead[time.strftime('%m-%d', time.localtime())] = data_list[2]
-cured[time.strftime('%m-%d', time.localtime())] = data_list[3]
-'''
+confirmed[_time[5:]] = data_1['confirmedCount']
+suspected[_time[5:]] = data_1['suspectedCount']
+cured[_time[5:]] = data_1['curedCount']
+dead[_time[5:]] = data_1['deadCount']
 f1 = plt.subplot(2, 1, 1)
 f2 = plt.subplot(2, 1, 2)
 plt.sca(f1)
-'''
-color = [confirmed_color, suspected_color, dead_color, cured_color]
-explode = [0, 0, 0, 0.1]
-patches, l_text, p_text = plt.pie(data_list, explode=explode, colors=color, labels=label_list,
-                                  labeldistance=1.1, autopct='%1.1f%%', shadow=True, startangle=90, pctdistance=0.6)
-plt.axis("equal")
-plt.title('2019-nCov 统计图 ' + _time)
-plt.legend()
-'''
 plt.plot(list(confirmed.keys()), list(confirmed.values()),
          marker='o', label='确诊', color=confirmed_color, linewidth=3)
 plt.plot(list(suspected.keys()), list(suspected.values()),
