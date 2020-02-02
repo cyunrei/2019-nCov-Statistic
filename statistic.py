@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import requests
 import json
 import time
+import copy
 import pandas as pd
 from lxml import etree
 from data import dead
@@ -14,6 +15,7 @@ confirmed_color = '#F74C31'
 suspected_color = '#F78207'
 dead_color = '#5D7092'
 cured_color = '#28B7A3'
+confirmed_and_suspected_color = '#2196F3'
 
 # Setup parameters
 plt.rcParams['font.family'] = ['Microsoft YaHei']
@@ -42,11 +44,18 @@ with open('./data/statistics (' + _time + ').json', 'w') as f:
     f.close()
 with open('./data/statistics (' + _time + ').json', 'r') as f:
     data_1 = json.load(f)
+
 # Append data
 confirmed[_time[5:]] = data_1['confirmedCount']
 suspected[_time[5:]] = data_1['suspectedCount']
 cured[_time[5:]] = data_1['curedCount']
 dead[_time[5:]] = data_1['deadCount']
+
+# Merge data
+confirmed_and_suspected = copy.deepcopy(confirmed)
+for key, value in suspected.items():
+    if key in confirmed:
+        confirmed_and_suspected[key] += value
 
 # Draw graph
 f1 = plt.subplot(2, 1, 1)
@@ -56,6 +65,8 @@ plt.plot(list(confirmed.keys()), list(confirmed.values()),
          marker='o', label='确诊', color=confirmed_color, linewidth=3)
 plt.plot(list(suspected.keys()), list(suspected.values()),
          marker='v', label='疑似', color=suspected_color, linewidth=3)
+plt.plot(list(confirmed_and_suspected.keys()), list(confirmed_and_suspected.values()),
+         marker='P', label='疑似与疑似', color=confirmed_and_suspected_color, linewidth=3)
 plt.title('2019-nCov 全国疫情新增趋势图 2019-01-11 至 ' + _time)
 plt.legend()
 plt.sca(f2)
